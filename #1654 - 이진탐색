@@ -1,0 +1,37 @@
+#랜선자르기 - 1654
+
+k, n = map(int, input().split())
+lan = []
+for i in range(k):
+    lan.append(int(input()))
+L = 1
+R = max(lan)
+
+while(L<=R):
+    mid = (L+R)//2
+    sum = 0
+    checkSum = 0
+    for i in range(k):
+        sum = sum + lan[i]//mid
+        
+    if(sum >= n):
+        L = mid + 1
+    elif(sum < n):
+        R = mid - 1
+
+print(R)
+
+'''
+#Left, Right, Mid(L+R/2)를 설정하여 만약 찾고자하는 수를 pivot이라 할 시
+
+1. if(pivot > mid)
+    - mid 보다 작은 수는 보지 않아도 되므로
+      Left == mid + 1
+
+2. if(pivot < mid)
+    - mid 보다 큰 수는 보지 않아도 되므로
+      Right == mid - 1
+
+*종료 조건은 Left가 Right보다 커질 때 이다. 그 때의 Right 값이 찾고자 하는 값이 된다.
+
+'''
