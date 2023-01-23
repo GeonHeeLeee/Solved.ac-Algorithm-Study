@@ -1,0 +1,75 @@
+#첫번째 코드
+
+# import sys
+# n = int(sys.stdin.readline())
+# numList = []
+# stack = []
+# result = []
+# for i in range(n):
+#     numList.append(int(sys.stdin.readline()))
+# flag = True
+
+# k = 1
+# for i in range(n):
+#     if(numList[i] not in stack):
+#         while(True):
+#             if(numList[i] == k):
+#                 stack.append(k)
+#                 result.append('+')
+#                 stack.pop()
+#                 result.append('-')
+#                 k += 1
+#                 break
+#             else:
+#                 stack.append(k)
+#                 result.append('+')
+#                 k += 1
+#     elif(numList[i] in stack):
+#         if(stack[-1] == numList[i]):
+#             stack.pop()
+#             result.append('-')
+#         else:
+#             print('NO')
+#             flag = False
+#             break
+# if(flag):
+#     for i in result:
+#         print(i)
+'''
+위의 코드가 처음에 짠 코드이다. 알고리즘 상으로는 문제가 없지만 시간 제한을 초과해 시간 복잡도를 줄이는 것이 목표가 되었다.
+원래 배열을 하나 더 선언해 배열에서 pop 하는 식으로 알고리즘을 짰는데, 시간 복잡도를 줄이고자 변수인 k로 대체하였지만 여전히 시간초과가 되었다.
+내가 예상하건데 처음 숫자를 받을 때, for문을 한번 돌고, 스택 알고리즘을 처리할때 최대 O(n^2)이 걸려서 시간 초과가 되는 것 같았다.
+따라서 우선 처음 수를 입력 받을 때, 알고리즘을 한번에 처리하기로 했다.
+'''
+
+#두번째 코드
+import sys
+stack = []
+result = []
+current = 1
+flag = True
+n = int(sys.stdin.readline())
+for i in range(n):
+    num = int(sys.stdin.readline())
+
+    while current <= num:
+        stack.append(current)
+        result.append('+')
+        current += 1
+
+    if(stack[-1] == num):
+        stack.pop()
+        result.append('-')
+    else:
+        print("NO")
+        flag = False
+        break
+
+if(flag):
+    for i in result:
+        print(i)
+        
+        
+'''
+flag 변수로 예외처리를 하였고, 수열을 입력 받을때 바로바로 처리를 하도록 알고리즘을 구성하였다.
+'''
