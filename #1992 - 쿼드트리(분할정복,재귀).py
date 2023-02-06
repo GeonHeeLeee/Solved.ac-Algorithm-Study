@@ -3,22 +3,28 @@ import sys
 quad = []
 for i in range(n):
     quad.append(list(sys.stdin.readline().strip()))
+    
 result = ''
+
 def quad_tree(n,x,y):
     global result
+    
     current = quad[y][x]
+    
     for ny in range(y,y+n):
         for nx in range(x,x+n):
-            if(quad[ny][nx] != current):
-                result += '('
+            
+            if(quad[ny][nx] != current): #만약 하나라도 다를 시 바로 재귀함수 호출
+                result += '(' #새로운 호출 시, 괄호를 열음
                 for i in range(2):
                     for j in range(2):
-                        quad_tree(n//2,x+j*n//2,y+i*n//2)
-                result += ')'
+                        quad_tree(n//2,x+j*n//2,y+i*n//2) #4구역으로 나누어 함수 다시 호출
+                        
+                result += ')' #호출이 끝날 시, 괄호 닫기
                 return
-    result += current
+    result += current #결과 
     
-quad_tree(8,0,0)
+quad_tree(n,0,0)
 print(result)
 
 '''
